@@ -70,6 +70,9 @@ public class Configuration implements ProxyConfig
     private boolean forgeSupport;
     private boolean rejectTransfers;
 
+    // session url
+    private String sessionURL;
+
     public void load()
     {
         ConfigurationAdapter adapter = ProxyServer.getInstance().getConfigurationAdapter();
@@ -86,6 +89,9 @@ public class Configuration implements ProxyConfig
                 ProxyServer.getInstance().getLogger().log( Level.WARNING, "Could not load server icon", ex );
             }
         }
+
+        // session 替换
+        sessionURL = ( (YamlConfig) adapter ).getSessionURL();
 
         listeners = adapter.getListeners();
         timeout = adapter.getInt( "timeout", timeout );

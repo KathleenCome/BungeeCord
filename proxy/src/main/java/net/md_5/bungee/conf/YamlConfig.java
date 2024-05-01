@@ -1,5 +1,6 @@
 package net.md_5.bungee.conf;
 
+import com.google.common.collect.ImmutableMap;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.File;
 import java.io.FileInputStream;
@@ -320,5 +321,15 @@ public class YamlConfig implements ConfigurationAdapter
     {
         Collection<String> permissions = get( "permissions." + group, null );
         return ( permissions == null ) ? Collections.EMPTY_SET : permissions;
+    }
+
+    private static final Map<String, Object> AUTH_SESSION_URL = ImmutableMap.of(
+            "url", "https://sessionserver.mojang.com"
+    );
+
+    public String getSessionURL()
+    {
+        Map<String, Object> settings = get( "auth_session", AUTH_SESSION_URL );
+        return (String) settings.get( "url" );
     }
 }
